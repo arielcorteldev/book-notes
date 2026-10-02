@@ -1,0 +1,10 @@
+CREATE TABLE books (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(200) NOT NULL,
+    author VARCHAR(200) NOT NULL,
+    isbn VARCHAR(13) UNIQUE,
+    rating INTEGER NOT NULL CHECK (rating BETWEEN 1 AND 5),
+    notes VARCHAR(1000) NOT NULL,
+    date_read DATE NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+)

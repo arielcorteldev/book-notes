@@ -11,6 +11,7 @@
   "license": "ISC",
   "type": "modules",
   "dependencies": {
+    "axios": "^1.20.0",
     "body-parser": "^2.3.0",
     "ejs": "^6.0.1",
     "express": "^5.2.1",
