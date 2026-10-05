@@ -22,8 +22,8 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// --- Date validation ---
 
+// --- Date validation ---
 function isValidDateRead(dateStr) {
   if (!dateStr) return false; // required check
 
@@ -53,7 +53,6 @@ function isNotFuture(dateStr) {
 }
 
 // --- ISBN validation ---
-
 function isValidISBN(isbn) {
   if (!isbn) return true; // optional field, blank is valid
 
@@ -94,7 +93,6 @@ function isValidISBN13(isbn) {
 }
 
 // --- Full book validation ---
-
 function validateBook(book) {
   const errors = {};
 
@@ -217,6 +215,7 @@ app.post("/books", async (req, res) => {
     );
 
     res.status(201).json(newBook);
+    // res.redirect("/")
   } catch (error) {
     if (error.code === '23505') {
         return res.status(409).json({
@@ -231,7 +230,30 @@ app.post("/books", async (req, res) => {
   }
 });
 
-app.get("/books/:id", (req, res) => {});
+app.get("/books/:id", async (req, res) => {
+    const id = parseInt(req.params.id);
+    try {
+        const result = await db.query("SELECT * FROM books WHERE id = $1", [id]);
+        const book = result.rows[0];
+
+        if (!book) {
+            return res.status(404).json({
+                message:
+                    "This book no longer exists."
+            })
+        }
+
+        const hasCover = await coverExists(book.isbn);
+
+        res.json({...book, hasCover});
+
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({
+            message: "Something went wrong. Please try again in a moment."
+        })
+    }
+});
 
 app.get("/books/:id/edit", (req, res) => {});
 
