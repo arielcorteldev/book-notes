@@ -346,6 +346,17 @@ app.post("/books/:id/delete", async (req, res) => {
   }
 });
 
+// Catch-all for any request that doesn't match a defined route (e.g. /nonexistent)
+app.use((req, res) => res.status(404).send("Page not found"));
+
+// Last-resort error handler — catches anything that slips past individual route try/catch blocks.
+// Must have exactly 4 params (err, req, res, next) — this signature is how Express
+// identifies it as an error handler specifically, not normal middleware.
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).send("Something went wrong. Please try again.");
+});
+
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });
