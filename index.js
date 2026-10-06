@@ -22,7 +22,6 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
 // --- Date validation ---
 function isValidDateRead(dateStr) {
   if (!dateStr) return false; // required check
@@ -132,17 +131,17 @@ function validateBook(book) {
 }
 
 async function coverExists(isbn) {
-    if (!isbn) return false;
+  if (!isbn) return false;
 
-    try {
-        await axios.get(
-            `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg?default=false`
-        );
-        return true;
-    } catch (error) {
-        console.error("Cover check failed: ", error.message);
-        return false;
-    }
+  try {
+    await axios.get(
+      `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg?default=false`,
+    );
+    return true;
+  } catch (error) {
+    console.error("Cover check failed: ", error.message);
+    return false;
+  }
 }
 
 app.get("/", async (req, res) => {
@@ -162,14 +161,14 @@ app.get("/", async (req, res) => {
     const books = result.rows;
 
     const booksWithCoverFlag = await Promise.all(
-        books.map(async (book) => ({
-            ...book,
-            hasCover: await coverExists(book.isbn),
-        }))
+      books.map(async (book) => ({
+        ...book,
+        hasCover: await coverExists(book.isbn),
+      })),
     );
 
     console.log(booksWithCoverFlag);
-    
+
     res.json(booksWithCoverFlag);
     // res.render("index.ejs", { books: booksWithCoverFlag });
   } catch (error) {
@@ -217,10 +216,10 @@ app.post("/books", async (req, res) => {
     res.status(201).json(newBook);
     // res.redirect("/")
   } catch (error) {
-    if (error.code === '23505') {
-        return res.status(409).json({
-            message: "This book is already on your list."
-        })
+    if (error.code === "23505") {
+      return res.status(409).json({
+        message: "This book is already on your list.",
+      });
     }
     console.error(error);
     res.status(500).json({
@@ -231,35 +230,118 @@ app.post("/books", async (req, res) => {
 });
 
 app.get("/books/:id", async (req, res) => {
-    const id = parseInt(req.params.id);
-    try {
-        const result = await db.query("SELECT * FROM books WHERE id = $1", [id]);
-        const book = result.rows[0];
+  const id = parseInt(req.params.id);
+  try {
+    const result = await db.query("SELECT * FROM books WHERE id = $1", [id]);
+    const book = result.rows[0];
 
-        if (!book) {
-            return res.status(404).json({
-                message:
-                    "This book no longer exists."
-            })
-        }
-
-        const hasCover = await coverExists(book.isbn);
-
-        res.json({...book, hasCover});
-
-    } catch (error) {
-        console.error(error)
-        res.status(500).json({
-            message: "Something went wrong. Please try again in a moment."
-        })
+    if (!book) {
+      return res.status(404).json({
+        message: "This book no longer exists.",
+      });
     }
+
+    const hasCover = await coverExists(book.isbn);
+
+    res.json({ ...book, hasCover });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "Something went wrong. Please try again in a moment.",
+    });
+  }
 });
 
-app.get("/books/:id/edit", (req, res) => {});
+app.get("/books/:id/edit", async (req, res) => {
+  const id = parseInt(req.params.id);
+  try {
+    const result = await db.query("SELECT * FROM books WHERE id = $1", [id]);
+    const book = result.rows[0];
 
-app.post("/books/:id", (req, res) => {});
+    if (!book) {
+      return res.redirect("/");
+    }
 
-app.post("/books/:id/delete", (req, res) => {});
+    res.json(book);
+    // res.render("edit.ejs", {book});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "Something went wrong. Please try again in a moment.",
+    });
+  }
+});
+
+app.post("/books/:id", async (req, res) => {
+  const id = parseInt(req.params.id);
+  const updatedBook = {
+    title: req.body.title,
+    author: req.body.author,
+    isbn: req.body.isbn ? req.body.isbn.replace(/-/g, "").toUpperCase() : null,
+    rating: parseInt(req.body.rating),
+    notes: req.body.notes,
+    date_read: req.body.date_read,
+  }
+
+  const errors = validateBook(updatedBook);
+
+  if (Object.keys(errors).length > 0) {
+    return res.status(400).json({ errors });
+  }
+
+  try {
+    const result = await db.query("UPDATE books SET title = $1, author = $2, isbn = $3, rating = $4, notes = $5, date_read = $6 WHERE id = $7", 
+      [
+        updatedBook.title,
+        updatedBook.author,
+        updatedBook.isbn,
+        updatedBook.rating,
+        updatedBook.notes,
+        updatedBook.date_read, 
+        id, 
+      ]);
+
+    if (result.rowCount === 0) {
+      return res.redirect("/");
+    }
+
+    res.status(200).json(updatedBook);
+    // res.redirect("/", { message: "Changes to your book notes were saved." })
+  } catch (error) {
+    if (error.code === "23505") {
+      return res.status(409).json({
+        message: "This book is already on your list.",
+      });
+    }
+    console.error(error);
+    res.status(500).json({
+      message:
+        "Something went wrong updating this book. Please try again in a moment.",
+    });
+  }
+});
+
+app.post("/books/:id/delete", async (req, res) => {
+  const id = parseInt(req.params.id);
+  try {
+    const result = await db.query("DELETE FROM books WHERE id = $1", [ id ]);
+
+    if (result.rowCount === 0) {
+      return res.redirect("/");
+    }
+
+    res.status(200).json({
+      message: "Book deleted."
+    })
+
+    // res.redirect("/", { message: "Book was deleted from your library." })
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "Couldn't delete this book. Please try again."
+    })
+  }
+});
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
