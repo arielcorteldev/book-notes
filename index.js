@@ -167,7 +167,7 @@ app.get("/", async (req, res) => {
       })),
     );
 
-    console.log(booksWithCoverFlag);
+    // console.log(booksWithCoverFlag);
 
     res.json(booksWithCoverFlag);
     // res.render("index.ejs", { books: booksWithCoverFlag });
