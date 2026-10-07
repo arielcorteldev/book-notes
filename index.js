@@ -3,6 +3,8 @@ import bodyParser from "body-parser";
 import pg from "pg";
 import axios from "axios";
 import dotenv from 'dotenv';
+import session from 'express-session';
+import flash from 'connect-flash';
 
 dotenv.config();
 
@@ -25,6 +27,12 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+}));
+app.use(flash());
 
 // --- Date validation ---
 function isValidDateRead(dateStr) {
@@ -148,6 +156,12 @@ async function coverExists(isbn) {
   }
 }
 
+app.use((req, res, next) => {
+  res.locals.successMessage = req.flash("success");
+  res.locals.errorMessage = req.flash("error");
+  next();
+})
+
 app.get("/", async (req, res) => {
   const sortOptions = {
     date_desc: { column: "date_read", direction: "DESC" },
@@ -217,13 +231,13 @@ app.post("/books", async (req, res) => {
       ],
     );
 
-    res.status(201).json(newBook);
-    // res.redirect("/")
+    // res.status(201).json(newBook);
+    req.flash("success", "Book was added to your library.");
+    res.redirect("/")
   } catch (error) {
     if (error.code === "23505") {
-      return res.status(409).json({
-        message: "This book is already on your list.",
-      });
+      req.flash("error", "This book is already on your list.")
+      return res.status(409)
     }
     console.error(error);
     res.status(500).json({

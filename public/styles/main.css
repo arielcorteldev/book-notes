@@ -1,0 +1,20 @@
+.flash {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 6px;
+}
+
+.flash--success {
+  background-color: var(--color-accent-green-100);
+}
+
+.flash--error {
+  background-color: var(--color-accent-red-100);
+}
+
+.flash__icon,
+.flash svg {
+  flex-shrink: 0;
+}
