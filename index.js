@@ -185,21 +185,17 @@ app.get("/", async (req, res) => {
       })),
     );
 
-    // console.log(booksWithCoverFlag);
-
-    res.json(booksWithCoverFlag);
-    // res.render("index.ejs", { books: booksWithCoverFlag });
+    res.render("index.ejs", { books: booksWithCoverFlag });
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json({ message: "Something went wrong. Please try again." });
+    req.flash("error", "Something went wrong. Please try again in a moment.")
+    res.redirect("/");
   }
 });
 
 app.get("/books/new", (req, res) => {
-  res.send("<h1>Add Book</h1>");
-  //    res.render("new.ejs");
+  // res.send("<h1>Add Book</h1>");
+  res.render("new.ejs");
 });
 
 app.post("/books", async (req, res) => {
@@ -215,7 +211,7 @@ app.post("/books", async (req, res) => {
   const errors = validateBook(newBook);
 
   if (Object.keys(errors).length > 0) {
-    return res.status(400).json({ errors });
+    return res.render("new.ejs", { book: newBook, errors });
   }
 
   try {
@@ -236,14 +232,14 @@ app.post("/books", async (req, res) => {
     res.redirect("/")
   } catch (error) {
     if (error.code === "23505") {
-      req.flash("error", "This book is already on your list.")
-      return res.status(409)
+      return res.render("new.ejs", {
+        book: newBook,
+        errors: { isbn: "This book is already on your library." },
+      });
     }
     console.error(error);
-    res.status(500).json({
-      message:
-        "Something went wrong saving your book. Please try again in a moment.",
-    });
+    req.flash("error", "Something went wrong. Please try again in a moment.")
+    res.redirect("/books/new");
   }
 });
 
@@ -254,19 +250,17 @@ app.get("/books/:id", async (req, res) => {
     const book = result.rows[0];
 
     if (!book) {
-      return res.status(404).json({
-        message: "This book no longer exists.",
-      });
+      req.flash("error", "This book no longer exists.");
+      return res.redirect("/");
     }
 
     const hasCover = await coverExists(book.isbn);
 
-    res.json({ ...book, hasCover });
+    res.render("show.ejs", { book, hasCover });
   } catch (error) {
     console.error(error);
-    res.status(500).json({
-      message: "Something went wrong. Please try again in a moment.",
-    });
+    req.flash("error", "Something went wrong. Please try again in a moment.")
+    res.redirect("/");
   }
 });
 
@@ -280,13 +274,12 @@ app.get("/books/:id/edit", async (req, res) => {
       return res.redirect("/");
     }
 
-    res.json(book);
-    // res.render("edit.ejs", {book});
+    // res.json(book);
+    res.render("edit.ejs", { book });
   } catch (error) {
     console.error(error);
-    res.status(500).json({
-      message: "Something went wrong. Please try again in a moment.",
-    });
+    req.flash("error", "Something went wrong. Please try again in a moment.");
+    res.redirect("/");
   }
 });
 
@@ -304,7 +297,7 @@ app.post("/books/:id", async (req, res) => {
   const errors = validateBook(updatedBook);
 
   if (Object.keys(errors).length > 0) {
-    return res.status(400).json({ errors });
+    return res.render("edit.ejs", { book: { ...updatedBook, id }, errors });
   }
 
   try {
@@ -323,19 +316,19 @@ app.post("/books/:id", async (req, res) => {
       return res.redirect("/");
     }
 
-    res.status(200).json(updatedBook);
-    // res.redirect("/", { message: "Changes to your book notes were saved." })
+    // res.status(200).json(updatedBook);
+    req.flash("success", "Changes to your book notes were saved.");
+    res.redirect("/");
   } catch (error) {
     if (error.code === "23505") {
-      return res.status(409).json({
-        message: "This book is already on your list.",
+      return res.render("edit.ejs", {
+        book: { ...updatedBook, id },
+        errors: { isbn: "This book is already on your library." },
       });
     }
     console.error(error);
-    res.status(500).json({
-      message:
-        "Something went wrong updating this book. Please try again in a moment.",
-    });
+    req.flash("error", "Something went wrong updating this book. Please try again in a moment.");
+    res.redirect(`/books/${id}/edit`);
   }
 });
 
@@ -348,16 +341,12 @@ app.post("/books/:id/delete", async (req, res) => {
       return res.redirect("/");
     }
 
-    res.status(200).json({
-      message: "Book deleted."
-    })
-
-    // res.redirect("/", { message: "Book was deleted from your library." })
+    req.flash("success", "Book was deleted from your library.");
+    res.redirect("/");
   } catch (error) {
     console.error(error);
-    res.status(500).json({
-      message: "Couldn't delete this book. Please try again."
-    })
+    req.flash("error", "Couldn't delete this book. Please try again.")
+    res.redirect("/");
   }
 });
 
@@ -369,7 +358,8 @@ app.use((req, res) => res.status(404).send("Page not found"));
 // identifies it as an error handler specifically, not normal middleware.
 app.use((err, req, res, next) => {
   console.error(err);
-  res.status(500).send("Something went wrong. Please try again.");
+  req.flash("error", "Something went wrong. Please try again.");
+  res.redirect("/");
 });
 
 app.listen(port, () => {
