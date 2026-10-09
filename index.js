@@ -196,10 +196,11 @@ app.get("/", async (req, res) => {
     rating_asc: { column: "rating", direction: "ASC" },
   };
 
-  // Get the column and direction set by user if any, by default use date_desc
-  const { column, direction } =
-    sortOptions[req.query.sort] || sortOptions.date_desc;
+  // Check first if req.query.sort is a key in sortOptions, if yes store it as sortKey, if not default to date_desc
+  const sortKey = Object.hasOwn(sortOptions, req.query.sort) ? req.query.sort : "date_desc";
 
+  // Get the column and direction set by user if any, by default use date_desc
+  const { column, direction } = sortOptions[sortKey];
   
   try {
     // db query to get all books ordered by sortOptions
@@ -217,7 +218,7 @@ app.get("/", async (req, res) => {
     );
     
     // render index.ejs and passed value of booksWithCoverFlag
-    res.render("index.ejs", { books: booksWithCoverFlag });
+    res.render("index.ejs", { books: booksWithCoverFlag, currentSort: sortKey });
   } catch (error) {
     // if there's an error, log error and flash an error and a message and redirect to /
     console.error(error);

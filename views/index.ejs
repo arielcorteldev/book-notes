@@ -35,6 +35,30 @@
             <h1>All Library Notes</h1>
             <p>Manage your books ratings, and key summary takeaways.</p>
             <div class="library">
+                <button id="sort-btn">
+                    <span>
+                        <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.11111 4.9032L4.55556 1.4032L1 4.9032M4.55556 1.4032V15.4032M8.11111 8.4032H11.6667M8.11111 11.9032H14.3333M8.11111 15.4032H17" stroke="#660C00" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                    Sort by
+                </button>
+                <form method="GET" action="/" onchange="this.submit()">
+                    <div id="sort-dropdown">
+                        <div id="date-sort">
+                            <input type="radio" name="sort" value="date_desc" id="date_desc" <%= currentSort === "date_desc" ? "checked" : "" %>>
+                            <label for="date_desc">Newest first</label>
+                            <input type="radio" name="sort" value="date_asc" id="date_asc" <%= currentSort === "date_asc" ? "checked" : "" %>>
+                            <label for="date_asc">Oldest first</label>
+                        </div>
+                        <div id="rating-sort">
+                            <input type="radio" name="sort" value="rating_desc" id="rating_desc" <%= currentSort === "rating_desc" ? "checked" : "" %>>
+                            <label for="rating_desc">Highest rated</label>
+                            <input type="radio" name="sort" value="rating_asc" id="rating_asc" <%= currentSort === "rating_asc" ? "checked" : "" %>>
+                            <label for="rating_asc">Lowest rated</label>
+                        </div>
+                    </div>
+                </form>
                 
             </div>
         <% } %> 
