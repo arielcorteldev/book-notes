@@ -186,6 +186,14 @@ app.use((req, res, next) => {
   next();
 })
 
+// Helper function to format date read in the frontend
+app.locals.formatDate = (dateStr, style = "short") => new Date(dateStr).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: style === "long" ? "long" : "short",
+  day: "numeric",
+  timeZone: "UTC",
+});
+
 // GET / - home page
 app.get("/", async (req, res) => {
   // Object keys for sort options
