@@ -26,3 +26,9 @@
   line-clamp: 3;
   overflow: hidden;
 }
+
+.rating {
+  display: flex;
+  gap: var(--spacing-8);
+  color: var(--color-accent-yellow-500); 
+}
