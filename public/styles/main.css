@@ -72,6 +72,26 @@ body {
   box-shadow: none;
 }
 
+.btn-secondary:hover {
+  background-color: var(--color-primary-200);
+}
+
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--color-primary-950);
+  outline-offset: 2px;
+}
+
+.btn-secondary:active {
+  background-color: var(--color-primary-400);
+}
+
+.btn-secondary:disabled {
+  background-color: transparent;
+  border: 1px solid var(--color-primary-100);
+  color: var(--color-primary-400);
+}
+
+
 .btn-delete {
   background-color: var(--color-accent-red-600);
   color: var(--color-accent-red-50);
