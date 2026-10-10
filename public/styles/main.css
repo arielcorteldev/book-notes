@@ -40,8 +40,29 @@ body {
 
 .btn-primary {
   background-color: var(--color-primary-950);
-  color: var(--color-neutral-50);
+  color: var(--color-primary-50);
   box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-800);
+  transform: translateY(-1px);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--color-primary-950);
+  outline-offset: 2px;
+}
+
+.btn-primary:active {
+  background-color: var(--color-primary-950);
+  transform: translateY(1px);
+  box-shadow: var(--shadow-xs);
+}
+
+.btn-primary:disabled {
+  background-color: var(--color-primary-50);
+  color: var(--color-neutral-100);
 }
 
 .btn-secondary {
