@@ -65,7 +65,7 @@
                     <% if (book.hasCover) { %>
                         <img class="library-card-cover" src="https://covers.openlibrary.org/b/isbn/<%= book.isbn %>-M.jpg" alt="<%= book.title %> cover">
                     <% } else { %>
-                        <img class="library-card-cover" src="https://placehold.co/100x149" alt="">
+                        <img class="library-card-cover" src="/images/placeholder-img.jpg" width="100" alt="">
                         <p>Cover not found</p>
                     <% } %> 
                     <div>
@@ -74,6 +74,7 @@
                             <p><%= book.author %></p>
                         </div>
                         <!-- rating - not yet implented -->
+                         
                         <p class="library-card-notes"><%= book.notes %></p>
                         <p class="library-card-date-read"><span>Date read </span><%= formatDate(book.date_read) %></p>
                     </div>
