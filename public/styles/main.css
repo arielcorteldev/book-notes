@@ -1,3 +1,99 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: var(--color-neutral-50);
+  font-family: var(--font-family);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+  padding: var(--spacing-128) var(--spacing-24) var(--spacing-64) var(--spacing-24);
+}
+
+/* buttons */
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+
+  font-weight: var(--font-weight-700);
+  text-decoration: none;
+}
+
+.btn-md {
+  padding: var(--spacing-8) var(--spacing-24);
+  font-size: var(--font-size-body);
+}
+
+.btn-sm {
+  padding: var(--spacing-8) var(--spacing-16);
+  font-size: var(--font-size-body-sm);
+}
+
+.btn-primary {
+  background-color: var(--color-primary-950);
+  color: var(--color-neutral-50);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 1px solid var(--color-primary-500);
+  color: var(--color-primary-950);
+  box-shadow: none;
+}
+
+.btn-delete {
+  background-color: var(--color-accent-red-600);
+  color: var(--color-accent-red-50);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-delete-secondary {
+  background-color: transparent;
+  border: 1px solid var(--color-accent-red-300);
+  color: var(--color-accent-red-600);
+  box-shadow: none;
+}
+
+header#home {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: var(--spacing-12) var(--spacing-16);
+  box-shadow: var(--shadow-xs);
+}
+
+#icon-title {
+  display: flex;
+  gap: var(--spacing-8);
+  align-items: center;
+}
+
+#icon {
+  color: var(--color-primary-950);
+}
+
+#title {
+  color: var(--color-primary-950);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-700);
+}
+
+
+
+
 .flash {
   display: flex;
   align-items: center;

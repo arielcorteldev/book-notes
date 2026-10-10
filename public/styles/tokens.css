@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400..700&family=Playfair+Display:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400..700&display=swap');
 
 :root {
   /* Spacing Scale (16px base) */
@@ -33,8 +33,7 @@
   --font-size-72: 72px; /* 4.5rem */
 
   /* Font Families */
-  --font-body: "Montserrat", sans-serif;
-  --font-heading: "Playfair Display", serif;
+  --font-family: "Montserrat", sans-serif;
 
   /* Mobile Sizes (Default - Mobile First) */
   --font-size-h1-mobile: var(--font-size-24); 
@@ -194,8 +193,8 @@
   */
 
   /* Base Shadows */
-  --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.2);
-  --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.25);
+  --shadow-xs: 0 2px 0px rgba(0, 0, 0, 0.25);
+  --shadow-sm: 0 4px 1px rgba(0, 0, 0, 0.20);
   --shadow-md: 0 5px 15px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.3);
   --shadow-xl: 0 15px 35px rgba(0, 0, 0, 0.3);
