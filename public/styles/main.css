@@ -156,17 +156,19 @@ body {
 .flash {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 16px;
+  gap: var(--spacing-8);
+  padding: var(--spacing-16) var(--spacing-24);
   border-radius: 6px;
 }
 
 .flash--success {
   background-color: var(--color-accent-green-100);
+  color: var(--color-accent-green-900);
 }
 
 .flash--error {
   background-color: var(--color-accent-red-100);
+  color: var(--color-accent-red-900);
 }
 
 .flash__icon,
