@@ -285,7 +285,7 @@ body {
 /* ------ HOME PAGE ------ */
 
 /* header */
-header#home {
+header {
   position: fixed;
   left: 0;
   top: 0;
@@ -294,6 +294,24 @@ header#home {
   justify-content: space-between;
   padding: var(--spacing-12) var(--spacing-16);
   box-shadow: var(--shadow-xs);
+}
+
+header .page-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+header .page-title > a {
+  text-decoration: none;
+  color: var(--color-primary-800);
+  font-size: var(--font-size-body-xs);
+}
+
+header .page-title > p {
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-700);
+  color: var(--color-primary-950);
 }
 
 #icon-title {
