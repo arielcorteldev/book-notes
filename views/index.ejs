@@ -22,8 +22,10 @@
     <main>
         <%- include('partials/flash') %> 
         <% if (books.length === 0) { %>
-         <h1>Your shelf is empty.</h1>
-         <p>Add a book and start taking notes.</p>
+        <div class="heading">
+            <h1>Your shelf is empty.</h1>
+            <p>Add a book and start taking notes.</p>
+        </div>
          <a href="/books/new" class="btn btn-sm btn-primary">
             <span>
                 <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,8 +35,10 @@
             Add your first book
         </a>
         <% } else { %>
-            <h1>All Library Notes</h1>
-            <p>Manage your books ratings, and key summary takeaways.</p>
+            <div class="heading">
+                <h1>All Library Notes</h1>
+                <p>Manage your books ratings, and key summary takeaways.</p>
+            </div>
             <button type="button" id="sort-btn">
                 <span>
                     <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -46,16 +50,26 @@
             <form method="GET" action="/" onchange="this.submit()">
                 <div id="sort-dropdown">
                     <div id="date-sort">
-                        <input type="radio" name="sort" value="date_desc" id="date_desc" <%= currentSort === "date_desc" ? "checked" : "" %>>
-                        <label for="date_desc">Newest first</label>
-                        <input type="radio" name="sort" value="date_asc" id="date_asc" <%= currentSort === "date_asc" ? "checked" : "" %>>
-                        <label for="date_asc">Oldest first</label>
+                        <p>Date</p>
+                        <span>
+                            <input type="radio" name="sort" value="date_desc" id="date_desc" <%= currentSort === "date_desc" ? "checked" : "" %>>
+                            <label for="date_desc">Newest first</label>
+                        </span>
+                        <span>
+                            <input type="radio" name="sort" value="date_asc" id="date_asc" <%= currentSort === "date_asc" ? "checked" : "" %>>
+                            <label for="date_asc">Oldest first</label>
+                        </span>
                     </div>
                     <div id="rating-sort">
-                        <input type="radio" name="sort" value="rating_desc" id="rating_desc" <%= currentSort === "rating_desc" ? "checked" : "" %>>
-                        <label for="rating_desc">Highest rated</label>
-                        <input type="radio" name="sort" value="rating_asc" id="rating_asc" <%= currentSort === "rating_asc" ? "checked" : "" %>>
-                        <label for="rating_asc">Lowest rated</label>
+                        <p>Rating</p>
+                        <span>
+                            <input type="radio" name="sort" value="rating_desc" id="rating_desc" <%= currentSort === "rating_desc" ? "checked" : "" %>>
+                            <label for="rating_desc">Highest rated</label>
+                        </span>
+                        <span>
+                            <input type="radio" name="sort" value="rating_asc" id="rating_asc" <%= currentSort === "rating_asc" ? "checked" : "" %>>
+                            <label for="rating_asc">Lowest rated</label>
+                        </span>
                     </div>
                 </div>
             </form>
@@ -65,8 +79,7 @@
                     <% if (book.hasCover) { %>
                         <img class="library-card-cover" src="https://covers.openlibrary.org/b/isbn/<%= book.isbn %>-M.jpg" alt="<%= book.title %> cover">
                     <% } else { %>
-                        <img class="library-card-cover" src="/images/placeholder-img.jpg" width="100" alt="">
-                        <p>Cover not found</p>
+                        <img class="library-card-cover" src="/images/placeholder-img.jpg" width="100" alt="No book cover">
                     <% } %> 
                     <div>
                         <div class="book-title-author">
