@@ -24,6 +24,7 @@ body {
 
   font-weight: var(--font-weight-700);
   text-decoration: none;
+  transition: all var(--duration-normal) ease-out;
 }
 
 .btn-md {
@@ -220,7 +221,6 @@ body {
   color: var(--color-secondary-950);
 }
 
-
 #date-sort, #rating-sort {
   display: flex;
   flex-direction: column;
@@ -238,6 +238,17 @@ body {
   color: var(--color-secondary-950);
   font-size: var(--font-size-body-xs);
   text-decoration: none;
+  transition: transform var(--duration-slow) ease-out;
+}
+
+.library-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.library-card:active {
+  box-shadow: var(--shadow-xs);
+  transform: translateY(1px);
 }
 
 .library-card > div {
