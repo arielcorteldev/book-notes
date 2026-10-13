@@ -35,14 +35,24 @@
                 </span>
                 Add book
             </button>
-            <button class="btn btn-sm btn-secondary" type="button" id="openCancelDialog" data-cancel-href="/">
+            <button class="btn btn-sm btn-secondary" type="button" id="open-cancel-dialog" data-cancel-href="/">
                 Cancel
             </button>
         </form>
 
-        <dialog>
-            
+        <dialog id="cancel-dialog">
+            <div>
+                <p>Discard this book?</p>
+                <p>The details you entered won't be saved.</p>
+            </div>
+            <div>
+                <button type="button" id="stayBtn" class="btn btn-sm btn-primary">Keep editing</button>
+                <a href="/" class="btn btn-sm btn-delete-secondary">Discard</a>
+            </div>
         </dialog>
     </main>
+
+
+    <script src="/js/cancelDialog.js"></script>
 </body>
 </html>
