@@ -15,18 +15,20 @@
             <h1>Book Details</h1>
             <hr>
             <label for="title">Book Title</label>
-            <input type="text" name="title" id="title" maxlength="200" required>
+            <input type="text" name="title" id="title" value="<%= book.title %>" maxlength="200" required>
             <label for="author">Author</label>
-            <input type="text" name="author" id="author" maxlength="200" required>
+            <input type="text" name="author" id="author" value="<%= book.author %>" maxlength="200" required>
             <label for="date-read">Date read</label>
-            <input type="date" name="date_read" id="date-read" required>
+            <input type="date" name="date_read" id="date-read" value="<%= book.date_read %>" required>
             <label for="isbn">ISBN <span>(Optional)</span></label>
-            <input type="text" name="isbn" id="isbn">
-            <label for="rating">Your Rating</label>
-            <!-- rating -->
+            <input type="text" name="isbn" id="isbn" maxlength="17" value="<%= book.isbn %>">
+            <fieldset>
+                <legend>Your Rating</legend>
+                <!-- rating -->
+            </fieldset>
             <label for="notes">Notes</label>
-            <textarea name="notes" id="notes" rows="10" maxlength="1000" required></textarea>
-            <span>0 / 1000</span>
+            <textarea name="notes" id="notes" rows="10" maxlength="1000" required><%= book.notes %></textarea>
+            <span id="notes-count"><%= (book.notes || "").length %> / 1000</span>
             <button class="btn btn-sm btn-primary" type="submit">
                 <span>
                     <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -46,7 +48,7 @@
                 <p>The details you entered won't be saved.</p>
             </div>
             <div>
-                <button type="button" id="stayBtn" class="btn btn-sm btn-primary">Keep editing</button>
+                <button type="button" id="stay-btn" class="btn btn-sm btn-primary">Keep editing</button>
                 <a href="/" class="btn btn-sm btn-delete-secondary">Discard</a>
             </div>
         </dialog>
