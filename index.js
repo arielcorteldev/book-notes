@@ -237,7 +237,7 @@ app.get("/", async (req, res) => {
 
 // GET /books/new - render add book page (new.ejs)
 app.get("/books/new", (req, res) => {
-  res.render("new.ejs", { books: {}, errors: {} });
+  res.render("new.ejs", { book: {}, errors: {} });
 });
 
 // POST /books - save new book
