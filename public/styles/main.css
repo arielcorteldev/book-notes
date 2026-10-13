@@ -25,6 +25,7 @@ body {
   font-weight: var(--font-weight-700);
   text-decoration: none;
   transition: all var(--duration-normal) ease-out;
+  border: none;
 }
 
 .btn-md {

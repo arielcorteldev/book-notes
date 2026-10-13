@@ -1,15 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <%- include('partials/head', { title: "Add new book" })  %> 
-</head>
+<%- include('partials/head', { title: "Add new book" })  %> 
 <body>
     <header id="add-book">
         <div class="page-title">
-            <a href="/">‹ Back to Library <span> | </span></a>
-            <p class="page-title">Add Book</p>
+            <a href="/">‹ Back to Library</a><span> | </span>
+            <p>Add Book</p>
         </div>
-        
     </header>
+
+    <main>
+        <%- include('partials/flash') %>
+        <form id="book-form" method="POST" action="/books" novalidate>
+            <h1>Book Details</h1>
+            <hr>
+            <label for="title">Book Title</label>
+            <input type="text" name="title" id="title" maxlength="200" required>
+            <label for="author">Author</label>
+            <input type="text" name="author" id="author" maxlength="200" required>
+            <label for="date-read">Date read</label>
+            <input type="date" name="date_read" id="date-read" required>
+            <label for="isbn">ISBN <span>(Optional)</span></label>
+            <input type="text" name="isbn" id="isbn">
+            <label for="rating">Your Rating</label>
+            <!-- rating -->
+            <label for="notes">Notes</label>
+            <textarea name="notes" id="notes" rows="10" maxlength="1000" required></textarea>
+            <span>0 / 1000</span>
+            <button class="btn btn-sm btn-primary" type="submit">
+                <span>
+                    <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.08333 0V8.16667M0 4.08333H8.16667" stroke="#F6F3EE" stroke-width="2"/>
+                    </svg>    
+                </span>
+                Add book
+            </button>
+            <button class="btn btn-sm btn-secondary" type="button" id="openCancelDialog" data-cancel-href="/">
+                Cancel
+            </button>
+        </form>
+
+        <dialog>
+            
+        </dialog>
+    </main>
 </body>
 </html>
