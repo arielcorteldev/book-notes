@@ -340,7 +340,7 @@ app.get("/books/:id/edit", async (req, res) => {
 
     // res.json(book);
     // render edit.ejs with the values of the book
-    res.render("edit.ejs", { book });
+    res.render("edit.ejs", { book, errors: {} });
   } catch (error) {
     // if there's an error, log error, flash error and message, and redirect to /
     console.error(error);

@@ -204,7 +204,7 @@ body {
   flex-shrink: 0;
 }
 
-/*  */
+/* dialogs */
 
 /* sort button */
 #sort-btn {
@@ -307,6 +307,21 @@ body {
   -webkit-line-clamp: 3;
   line-clamp: 3;
   overflow: hidden;
+}
+
+/* form fields */
+
+.field-error {
+  color: var(--color-accent-red-600);
+}
+
+.field-error:empty {
+  display: none;
+}
+
+input[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: var(--color-accent-red-600);
 }
 
 

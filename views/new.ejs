@@ -47,7 +47,7 @@
 
             <label for="notes">Notes</label>
             <textarea name="notes" id="notes" rows="10" maxlength="1000" required aria-describedby="notes-error" <%= errors.notes ? 'aria-invalid="true"' : "" %>><%= book.notes %></textarea>
-            <p class="field-error" id="notes-error"><%= error.notes || "" %></p>
+            <p class="field-error" id="notes-error"><%= errors.notes || "" %></p>
             <span id="notes-count"><%= (book.notes || "").length %> / 1000</span>
 
             <button class="btn btn-sm btn-primary" type="submit">
