@@ -14,15 +14,24 @@
         <form id="book-form" method="POST" action="/books" novalidate>
             <h1>Book Details</h1>
             <hr>
+
             <label for="title">Book Title</label>
-            <input type="text" name="title" id="title" value="<%= book.title %>" maxlength="200" required>
+            <input type="text" name="title" id="title" value="<%= book.title %>" maxlength="200" required aria-describedby="title-error" <%= errors.title ? 'aria-invalid="true"' : "" %>>
+            <p class="field-error" id="title-error"><%= errors.title || "" %></p>
+
             <label for="author">Author</label>
-            <input type="text" name="author" id="author" value="<%= book.author %>" maxlength="200" required>
+            <input type="text" name="author" id="author" value="<%= book.author %>" maxlength="200" required aria-describedby="author-error" <%= errors.author ? 'aria-invalid="true"' : "" %>>
+            <p class="field-error" id="author-error"><%= errors.author || "" %></p>
+
             <label for="date-read">Date read</label>
-            <input type="date" name="date_read" id="date-read" value="<%= book.date_read %>" required>
+            <input type="date" name="date_read" id="date-read" value="<%= book.date_read %>" required aria-describedby="date-read-error" <%= errors.date_read ? 'aria-invalid="true"' : "" %>>
+            <p class="field-error" id="date-read-error"><%= errors.date_read || "" %></p>
+
             <label for="isbn">ISBN <span>(Optional)</span></label>
-            <input type="text" name="isbn" id="isbn" maxlength="17" value="<%= book.isbn %>">
-            <fieldset>
+            <input type="text" name="isbn" id="isbn" maxlength="17" value="<%= book.isbn %>" aria-describedby="isbn-error" <%= errors.isbn ? 'aria-invalid="true"' : "" %>>
+            <p class="field-error" id="isbn-error"><%= errors.isbn || "" %></p>
+
+            <fieldset aria-describedby="rating-error" <%= errors.rating ? 'aria-invalid="true"' : "" %>>
                 <legend>Your Rating</legend>
                 <div class="star-input">
                     <% for (let i = 5; i >= 1; i--) { %>
@@ -33,10 +42,14 @@
                         </label>
                     <% } %>
                 </div>
+                <p class="field-error" id="rating-error"><%= errors.rating || "" %></p>
             </fieldset>
+
             <label for="notes">Notes</label>
-            <textarea name="notes" id="notes" rows="10" maxlength="1000" required><%= book.notes %></textarea>
+            <textarea name="notes" id="notes" rows="10" maxlength="1000" required aria-describedby="notes-error" <%= errors.notes ? 'aria-invalid="true"' : "" %>><%= book.notes %></textarea>
+            <p class="field-error" id="notes-error"><%= error.notes || "" %></p>
             <span id="notes-count"><%= (book.notes || "").length %> / 1000</span>
+
             <button class="btn btn-sm btn-primary" type="submit">
                 <span>
                     <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
