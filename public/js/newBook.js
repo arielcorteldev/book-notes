@@ -5,6 +5,7 @@ const bookForm = document.getElementById("book-form");
 const notesInput = document.getElementById("notes");
 const notesCount = document.getElementById("notes-count");
 const dateReadInput = document.getElementById("date-read");
+const backLink = document.getElementById("back-link");
 
 const cancelDestination = openCancelBtn.dataset.cancelHref;
 
@@ -22,6 +23,13 @@ openCancelBtn.addEventListener("click", () => {
         window.location.href = cancelDestination;
     }
 });
+
+backLink.addEventListener("click", (e) => {
+    if (formChanged) {
+        e.preventDefault();
+        cancelDialog.showModal();
+    }
+})
 
 stayBtn.addEventListener("click", () => cancelDialog.close());
 
