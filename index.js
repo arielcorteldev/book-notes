@@ -248,7 +248,7 @@ app.post("/books", async (req, res) => {
     author: req.body.author,
     isbn: req.body.isbn ? req.body.isbn.replace(/-/g, "").toUpperCase() : null, // if isbn is provided, if not, set value to null
     rating: parseInt(req.body.rating),
-    notes: req.body.notes,
+    notes: req.body.notes?.replace(/\r\n/g, "\n"),
     date_read: req.body.date_read,
   };
 
