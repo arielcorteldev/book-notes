@@ -153,6 +153,33 @@ body {
   color: var(--color-accent-yellow-500); 
 }
 
+.star-input {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  gap: var(--spacing-8);
+  padding: 4px;
+  color: var(--color-accent-yellow-500);
+}
+
+.star-input input:checked ~ label svg {
+  fill: currentColor; 
+}
+
+.visually-hidden,
+.star-input input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.star-input input:checked ~ label svg,
+.star-input input:checked ~ label svg * {
+  fill: currentColor;
+}
+
 /* flash notification */
 .flash {
   display: flex;

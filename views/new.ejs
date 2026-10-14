@@ -25,9 +25,9 @@
             <fieldset>
                 <legend>Your Rating</legend>
                 <div class="star-input">
-                    <% for( let i = 5; i >= 1; i-- ) { %>
-                        <input type="radio" name="rating" id="rating-<%- i %>" value="<%= i %>" <%= book.rating === i ? "checked" : "" %>>
-                        <label for="rating-<%- i %>">
+                    <% for (let i = 5; i >= 1; i--) { %>
+                        <input type="radio" name="rating" id="rating-<%= i %>" value="<%= i %>" <%= book.rating === i ? "checked" : "" %>>
+                        <label for="rating-<%= i %>">
                             <span class="visually-hidden"><%= i %> star<%= i > 1 ? "s" : "" %></span>
                             <%- include('partials/star', { filled: false }) %> 
                         </label>
