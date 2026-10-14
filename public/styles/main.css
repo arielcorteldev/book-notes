@@ -154,6 +154,7 @@ body {
 }
 
 .star-input {
+  position: relative;
   display: inline-flex;
   flex-direction: row-reverse;
   gap: var(--spacing-8);
