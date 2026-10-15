@@ -15,21 +15,30 @@
             <h1>Book Details</h1>
             <hr>
 
-            <label for="title">Book Title</label>
-            <input type="text" name="title" id="title" value="<%= book.title %>" maxlength="200" required aria-describedby="title-error" aria-invalid="<%= errors.title ? 'true' : 'false' %>">
-            <p class="field-error" id="title-error"><%= errors.title || "" %></p>
-
-            <label for="author">Author</label>
-            <input type="text" name="author" id="author" value="<%= book.author %>" maxlength="200" required aria-describedby="author-error" aria-invalid="<%= errors.author ? 'true' : 'false' %>">
-            <p class="field-error" id="author-error"><%= errors.author || "" %></p>
-
-            <label for="date-read">Date read</label>
-            <input type="date" name="date_read" id="date-read" value="<%= book.date_read %>" required aria-describedby="date-read-error" aria-invalid="<%= errors.date_read ? 'true' : 'false' %>">
-            <p class="field-error" id="date-read-error"><%= errors.date_read || "" %></p>
-
-            <label for="isbn">ISBN <span>(Optional)</span></label>
-            <input type="text" name="isbn" id="isbn" maxlength="17" value="<%= book.isbn %>" aria-describedby="isbn-error" aria-invalid="<%= errors.isbn ? 'true' : 'false' %>">
-            <p class="field-error" id="isbn-error"><%= errors.isbn || "" %></p>
+            <div class="form-field">
+                <label for="title">Book Title</label>
+                <input type="text" name="title" id="title" value="<%= book.title %>" maxlength="200" required aria-describedby="title-error" aria-invalid="<%= errors.title ? 'true' : 'false' %>">
+                <p class="field-error" id="title-error"><%= errors.title || "" %></p>
+            </div>
+            
+            <div class="form-field">
+                <label for="author">Author</label>
+                <input type="text" name="author" id="author" value="<%= book.author %>" maxlength="200" required aria-describedby="author-error" aria-invalid="<%= errors.author ? 'true' : 'false' %>">
+                <p class="field-error" id="author-error"><%= errors.author || "" %></p>
+            </div>
+            
+            <div class="form-field">
+                <label for="date-read">Date read</label>
+                <input type="date" name="date_read" id="date-read" value="<%= book.date_read %>" required aria-describedby="date-read-error" aria-invalid="<%= errors.date_read ? 'true' : 'false' %>">
+                <p class="field-error" id="date-read-error"><%= errors.date_read || "" %></p>
+            </div>
+            
+            <div class="form-field">
+                <label for="isbn">ISBN <span>(Optional)</span></label>
+                <input type="text" name="isbn" id="isbn" maxlength="17" value="<%= book.isbn %>" aria-describedby="isbn-error" aria-invalid="<%= errors.isbn ? 'true' : 'false' %>">
+                <p class="field-error" id="isbn-error"><%= errors.isbn || "" %></p>
+            </div>
+            
 
             <fieldset aria-describedby="rating-error" role="radiogroup" aria-invalid="<%= errors.rating ? 'true' : 'false' %>">
                 <legend>Your Rating</legend>
@@ -45,11 +54,13 @@
                 <p class="field-error" id="rating-error"><%= errors.rating || "" %></p>
             </fieldset>
 
-            <label for="notes">Notes</label>
-            <textarea name="notes" id="notes" rows="10" maxlength="1000" required aria-describedby="notes-error notes-count" aria-invalid="<%= errors.notes ? 'true' : 'false' %>"><%= book.notes %></textarea>
-            <p class="field-error" id="notes-error"><%= errors.notes || "" %></p>
-            <span id="notes-count"><%= (book.notes || "").length %> / 1000</span>
-
+            <div class="form-field">
+                <label for="notes">Notes</label>
+                <textarea name="notes" id="notes" rows="10" maxlength="1000" required aria-describedby="notes-error notes-count" aria-invalid="<%= errors.notes ? 'true' : 'false' %>"><%= book.notes %></textarea>
+                <p class="field-error" id="notes-error"><%= errors.notes || "" %></p>
+                <span id="notes-count"><%= (book.notes || "").length %> / 1000</span>
+            </div>
+            
             <button class="btn btn-sm btn-primary" type="submit">
                 <span>
                     <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
