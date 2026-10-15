@@ -151,6 +151,7 @@ body {
   display: flex;
   gap: var(--spacing-8);
   color: var(--color-accent-yellow-500); 
+  padding: var(--spacing-4);
 }
 
 .star-input {
@@ -227,7 +228,7 @@ body {
 /* sort dropdown */
 #sort-dropdown {
   position: absolute;
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: var(--spacing-12);
   padding: var(--spacing-12) var(--spacing-16);
@@ -262,6 +263,7 @@ body {
 
 /* library card */
 .library-card {
+  width: 100%;
   display: flex;
   gap: var(--spacing-12);
   padding: var(--spacing-12);
@@ -308,6 +310,22 @@ body {
   -webkit-line-clamp: 3;
   line-clamp: 3;
   overflow: hidden;
+}
+
+.library-card-cover {
+  width: 100px;
+  height: auto;
+  object-fit: contain;
+}
+
+.library-card-date-read {
+  display: flex;
+  gap: var(--spacing-8);
+  
+}
+
+.library-card-date-read span {
+  font-weight: var(--font-weight-600);
 }
 
 /* form fields */
@@ -377,6 +395,7 @@ header .page-title > p {
 main {
   display: flex;
   flex-direction: column;
+  width: 100%;
   gap: var(--spacing-24);
   justify-content: flex-start;
   align-items: flex-start;
@@ -388,12 +407,12 @@ main .heading {
   gap: var(--spacing-12);
 }
 
-main h1 {
+.heading h1 {
   font-size: var(--font-size-h1);
   color: var(--color-primary-950);
 }
 
-main p {
+.heading p {
   color: var(--color-secondary-950);
   font-size: var(--font-size-body-xs);
 }
@@ -403,4 +422,7 @@ main p {
   grid-template-columns: 1fr;
   gap: var(--spacing-16);
 }
+
+
+/* ------ ADD NEW BOOK PAGE ------ */
 
