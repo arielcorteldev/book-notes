@@ -18,25 +18,45 @@
             <div class="form-field">
                 <label for="title">Book Title</label>
                 <input type="text" name="title" id="title" value="<%= book.title %>" maxlength="200" required aria-describedby="title-error" aria-invalid="<%= errors.title ? 'true' : 'false' %>">
-                <p class="field-error" id="title-error"><%= errors.title || "" %></p>
+                <p class="field-error" id="title-error">
+                    <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 12.6667H14.6667L7.33333 0L0 12.6667ZM8 10.6667H6.66667V9.33333H8V10.6667ZM8 8H6.66667V5.33333H8V8Z" fill="#E7000B"/>
+                    </svg>  
+                    <%= errors.title || "" %>
+                </p>
             </div>
             
             <div class="form-field">
                 <label for="author">Author</label>
                 <input type="text" name="author" id="author" value="<%= book.author %>" maxlength="200" required aria-describedby="author-error" aria-invalid="<%= errors.author ? 'true' : 'false' %>">
-                <p class="field-error" id="author-error"><%= errors.author || "" %></p>
+                <p class="field-error" id="author-error">
+                    <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 12.6667H14.6667L7.33333 0L0 12.6667ZM8 10.6667H6.66667V9.33333H8V10.6667ZM8 8H6.66667V5.33333H8V8Z" fill="#E7000B"/>
+                    </svg>  
+                    <%= errors.author || "" %>
+                </p>
             </div>
             
             <div class="form-field">
                 <label for="date-read">Date read</label>
                 <input type="date" name="date_read" id="date-read" value="<%= book.date_read %>" required aria-describedby="date-read-error" aria-invalid="<%= errors.date_read ? 'true' : 'false' %>">
-                <p class="field-error" id="date-read-error"><%= errors.date_read || "" %></p>
+                <p class="field-error" id="date-read-error">
+                    <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 12.6667H14.6667L7.33333 0L0 12.6667ZM8 10.6667H6.66667V9.33333H8V10.6667ZM8 8H6.66667V5.33333H8V8Z" fill="#E7000B"/>
+                    </svg>  
+                    <%= errors.date_read || "" %>
+                </p>
             </div>
             
             <div class="form-field">
                 <label for="isbn">ISBN <span>(Optional)</span></label>
-                <input type="text" name="isbn" id="isbn" maxlength="17" value="<%= book.isbn %>" aria-describedby="isbn-error" aria-invalid="<%= errors.isbn ? 'true' : 'false' %>">
-                <p class="field-error" id="isbn-error"><%= errors.isbn || "" %></p>
+                <input type="text" name="isbn" id="isbn" maxlength="17" value="<%= book.isbn %>" aria-describedby="isbn-error" aria-invalid="<%= errors.isbn ? 'true' : 'false' %>" placeholder="9780743273565">
+                <p class="field-error" id="isbn-error">
+                    <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 12.6667H14.6667L7.33333 0L0 12.6667ZM8 10.6667H6.66667V9.33333H8V10.6667ZM8 8H6.66667V5.33333H8V8Z" fill="#E7000B"/>
+                    </svg>                        
+                    <%= errors.isbn || "" %>
+                </p>
             </div>
             
 
@@ -51,13 +71,23 @@
                         </label>
                     <% } %>
                 </div>
-                <p class="field-error" id="rating-error"><%= errors.rating || "" %></p>
+                <p class="field-error" id="rating-error">
+                    <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 12.6667H14.6667L7.33333 0L0 12.6667ZM8 10.6667H6.66667V9.33333H8V10.6667ZM8 8H6.66667V5.33333H8V8Z" fill="#E7000B"/>
+                    </svg>  
+                    <%= errors.rating || "" %>
+                </p>
             </fieldset>
 
             <div class="form-field">
                 <label for="notes">Notes</label>
                 <textarea name="notes" id="notes" rows="10" maxlength="1000" required aria-describedby="notes-error notes-count" aria-invalid="<%= errors.notes ? 'true' : 'false' %>"><%= book.notes %></textarea>
-                <p class="field-error" id="notes-error"><%= errors.notes || "" %></p>
+                <p class="field-error" id="notes-error">
+                    <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 12.6667H14.6667L7.33333 0L0 12.6667ZM8 10.6667H6.66667V9.33333H8V10.6667ZM8 8H6.66667V5.33333H8V8Z" fill="#E7000B"/>
+                    </svg>  
+                    <%= errors.notes || "" %>
+                </p>
                 <span id="notes-count"><%= (book.notes || "").length %> / 1000</span>
             </div>
             
