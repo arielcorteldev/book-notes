@@ -172,6 +172,46 @@ body {
 
 /* DIALOGS */
 
+#cancel-dialog {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--spacing-24);
+  background-color: var(--color-neutral-50);
+  border: 1px solid var(--color-neutral-100);
+  box-shadow: var(--shadow-lg);
+
+  width: 300px;
+  height: 215px;
+}
+
+#cancel-dialog .dialog-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+
+  font-size: var(--font-size-body-sm);
+  color: var(--color-secondary-950);
+  font-weight: var(--font-weight-400);
+}
+
+#cancel-dialog .dialog-text p:first-child {
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-700);
+  color: var(--color-primary-950);
+}
+
+#cancel-dialog .dialog-action {
+  display: flex;
+  width: 100%;
+  gap: var(--spacing-8);
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+
+
 /* SORT BUTTON */
 #sort-btn {
   display: flex;
@@ -373,7 +413,6 @@ input:focus-visible, textarea:focus-visible {
   border: 2px solid var(--color-primary-800);
   outline: none;
 }
-
 
 /* STAR RATING */
 .rating {
