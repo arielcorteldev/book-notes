@@ -15,7 +15,7 @@ body {
 
 /* ------- COMPONENTS -------- */
 
-/* buttons */
+/* BUTTONS */
 .btn {
   display: flex;
   justify-content: center;
@@ -146,44 +146,7 @@ body {
   color: var(--color-accent-red-300);
 }
 
-/* star rating */
-.rating {
-  display: flex;
-  gap: var(--spacing-8);
-  color: var(--color-accent-yellow-500); 
-  padding: var(--spacing-4);
-}
-
-.star-input {
-  position: relative;
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-  gap: var(--spacing-8);
-  padding: 4px;
-  color: var(--color-accent-yellow-500);
-}
-
-.star-input input:checked ~ label svg {
-  fill: currentColor; 
-}
-
-.visually-hidden,
-.star-input input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-}
-
-.star-input input:checked ~ label svg,
-.star-input input:checked ~ label svg * {
-  fill: currentColor;
-}
-
-/* flash notification */
+/* FLASH NOTIFICATION */
 .flash {
   display: flex;
   align-items: center;
@@ -207,9 +170,9 @@ body {
   flex-shrink: 0;
 }
 
-/* dialogs */
+/* DIALOGS */
 
-/* sort button */
+/* SORT BUTTON */
 #sort-btn {
   display: flex;
   justify-content: center;
@@ -226,7 +189,7 @@ body {
   border: none;
 }
 
-/* sort dropdown */
+/* SORT DROPDOWN */
 #sort-dropdown {
   position: absolute;
   display: none;
@@ -262,7 +225,7 @@ body {
   gap: var(--spacing-8);
 }
 
-/* library card */
+/* LIBRARY CARD */
 .library-card {
   width: 100%;
   display: flex;
@@ -329,13 +292,7 @@ body {
   font-weight: var(--font-weight-600);
 }
 
-/* form fields */
-
-.field-error {
-  color: var(--color-accent-red-600);
-  font-size: var(--font-size-body-xs);
-  font-weight: var(--font-weight-500);
-}
+/* FORM FIELDS */
 
 .form-field {
   display: flex;
@@ -350,9 +307,15 @@ body {
   font-weight: var(--font-weight-400);
 }
 
+.field-error {
+  color: var(--color-accent-red-600);
+  font-size: var(--font-size-body-xs);
+  font-weight: var(--font-weight-500);
+}
+
 input[aria-invalid="true"],
 textarea[aria-invalid="true"] {
-  border-color: var(--color-accent-red-600);
+  border: 2px solid var(--color-accent-red-600);
 }
 
 textarea {
@@ -401,19 +364,62 @@ legend {
   margin-bottom: 6px;
 }
 
-.star-input svg {
-  color: var(--color-accent-yellow-500);
-}
-
 input[type="date"]:invalid,
 input::placeholder {
   color: var(--color-primary-300);
 }
 
+input:focus-visible, textarea:focus-visible {
+  border: 2px solid var(--color-primary-800);
+  outline: none;
+}
+
+
+/* STAR RATING */
+.rating {
+  display: flex;
+  gap: var(--spacing-8);
+  color: var(--color-accent-yellow-500); 
+  padding: var(--spacing-4);
+}
+
+.star-input {
+  position: relative;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: var(--spacing-8);
+  padding: 4px;
+  color: var(--color-accent-yellow-500);
+}
+
+.star-input svg {
+  color: var(--color-accent-yellow-500);
+}
+
+.star-input input:checked ~ label svg {
+  fill: currentColor; 
+}
+
+.visually-hidden,
+.star-input input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.star-input input:checked ~ label svg,
+.star-input input:checked ~ label svg * {
+  fill: currentColor;
+}
+
 
 /* ------ HOME PAGE ------ */
 
-/* header */
+/* HEADER */
 header {
   position: fixed;
   left: 0;
