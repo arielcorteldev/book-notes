@@ -172,17 +172,20 @@ body {
 
 /* DIALOGS */
 
-#cancel-dialog {
+#cancel-dialog[open] {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: var(--spacing-24);
+  width: 300px;
+  height: 215px;
+}
+
+#cancel-dialog {
   background-color: var(--color-neutral-50);
   border: 1px solid var(--color-neutral-100);
   box-shadow: var(--shadow-lg);
-
-  width: 300px;
-  height: 215px;
+  margin: auto;
 }
 
 #cancel-dialog .dialog-text {
