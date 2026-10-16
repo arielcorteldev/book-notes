@@ -156,8 +156,9 @@ body {
 
 .star-input {
   position: relative;
-  display: inline-flex;
+  display: flex;
   flex-direction: row-reverse;
+  justify-content: flex-end;
   gap: var(--spacing-8);
   padding: 4px;
   color: var(--color-accent-yellow-500);
@@ -332,12 +333,8 @@ body {
 
 .field-error {
   color: var(--color-accent-red-600);
-  font-size: var(--font-size-body-sm);
+  font-size: var(--font-size-body-xs);
   font-weight: var(--font-weight-500);
-}
-
-.field-error:empty {
-  display: none;
 }
 
 .form-field {
@@ -347,7 +344,7 @@ body {
   width: 100%;
 }
 
-.form-field span {
+.form-field label > span {
   font-size: var(--font-size-body-xs);
   color: var(--color-secondary-400);
   font-weight: var(--font-weight-400);
@@ -358,7 +355,28 @@ textarea[aria-invalid="true"] {
   border-color: var(--color-accent-red-600);
 }
 
-label {
+textarea {
+  resize: none;
+}
+
+.notes-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#notes-count {
+  font-size: var(--font-size-body-xs);
+  font-weight: var(--font-weight-400);
+  color: var(--color-primary-800);
+  text-align: right;
+}
+
+#notes-count.at-limit {
+  color: var(--color-accent-red-600);
+}
+
+label, legend {
   font-size: var(--font-size-body-xs);
   color: var(--color-secondary-950);
   font-weight: var(--font-weight-600);
@@ -371,6 +389,20 @@ input, textarea {
 
   padding: var(--spacing-8) var(--spacing-12);
   border: 1px solid var(--color-primary-300);
+}
+
+fieldset {
+  border: none;
+  display: flex;
+  flex-direction: column;
+}
+
+legend {
+  margin-bottom: 6px;
+}
+
+.star-input svg {
+  color: var(--color-accent-yellow-500);
 }
 
 input[type="date"]:invalid,

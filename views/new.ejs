@@ -93,15 +93,17 @@
             <div class="form-field">
                 <label for="notes">Notes</label>
                 <textarea name="notes" id="notes" rows="10" maxlength="1000" required aria-describedby="<%= errors.notes ? 'notes-error' : '' %> notes-count" aria-invalid="<%= errors.notes ? 'true' : 'false' %>"><%= book.notes %></textarea>
-                <% if (errors.notes) { %>
-                    <p class="field-error" id="notes-error">
-                        <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path d="M0 12.6667H14.6667L7.33333 0L0 12.6667ZM8 10.6667H6.66667V9.33333H8V10.6667ZM8 8H6.66667V5.33333H8V8Z" fill="#E7000B"/>
-                        </svg>  
-                        <%= errors.notes %>
-                    </p>
-                <% } %>
-                <span id="notes-count"><%= (book.notes || "").length %> / 1000</span>
+                <div class="notes-info">
+                    <% if (errors.notes) { %>
+                        <p class="field-error" id="notes-error">
+                            <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M0 12.6667H14.6667L7.33333 0L0 12.6667ZM8 10.6667H6.66667V9.33333H8V10.6667ZM8 8H6.66667V5.33333H8V8Z" fill="#E7000B"/>
+                            </svg>  
+                            <%= errors.notes %>
+                        </p>
+                    <% } %>
+                    <span id="notes-count"><%= (book.notes || "").length %> / 1000</span>
+                </div>
             </div>
             
             <button class="btn btn-sm btn-primary" type="submit">

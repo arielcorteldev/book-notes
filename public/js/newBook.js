@@ -35,6 +35,7 @@ stayBtn.addEventListener("click", () => cancelDialog.close());
 
 function updateNotesCount() {
     notesCount.textContent = `${notesInput.value.length} / 1000`;
+    notesCount.classList.toggle("at-limit", notesInput.value.length >= 1000);
 }
 
 updateNotesCount();
