@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head', { title: book.title })  %> 
+<body>
+    <header id="add-book">
+        <div class="page-title">
+            <a href="/" id="back-link">‹ Back to Library</a><span> | </span>
+            <p><%= book.title %></p>
+        </div>
+    </header>
+
+    <main>
+        <% if (hasCover) { %>
+            <img src="https://covers.openlibrary.org/b/isbn/<%= book.isbn %>-L.jpg" alt="<%= book.title %> cover">
+        <% } else { %>
+            <img src="/images/placeholder-img.jpg" alt="">
+            <p>Cover not found</p>
+        <% } %> 
+
+        <div class="book-details">
+            <div class="book-title-author">
+                <h1><%= book.title %></h1>
+                <p><%= book.author %></p>
+            </div>
+
+            <div class="rating" role="img" aria-label="Rated <%= book.rating %> out of 5">
+                <% for( let i = 1; i <= 5; i++ ) { %>
+                    <%- include('partials/star', { filled: i <= book.rating })  %> 
+                <% } %>
+            </div>
+
+            <p class="book-date-read">Date read <span><%= formatDate(book.date_read) %></span></p>
+
+            <div class="book-notes">
+                <p>Notes</p>
+                <p><%= book.notes %></p>
+            </div>
+
+            <div class="action-buttons">
+                <a href="/books/<%= book.id %>/edit" class="btn btn-sm btn-primary">Edit</a>
+                <button type="button" id="open-delete-dialog" class="btn btn-sm btn-delete-secondary">Delete</button>
+            </div>
+
+            <dialog id="delete-dialog">
+                <div class="dialog-text">
+                    <p>Delete this book?</p>
+                    <p>This will permanently remove it from your library.</p>
+                </div>
+                <div class="dialog-action">
+                    <form method="POST" action="/books/<%= book.id %>/delete">
+                        <button type="submit" class="btn btn-sm btn-delete">Delete</button>
+                        <button type="button" id="cancel-delete" class="btn btn-sm btn-secondary">Keep book</a>
+                    </form>
+                </div>
+            </dialog>
+        </div>
+    </main>
+
+    <script src="/js/newBook.js"></script>
+</body>
+</html>
