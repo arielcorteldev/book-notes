@@ -172,7 +172,8 @@ body {
 
 /* DIALOGS */
 
-#cancel-dialog[open] {
+#cancel-dialog[open],
+#delete-dialog[open] {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -181,14 +182,15 @@ body {
   height: 215px;
 }
 
-#cancel-dialog {
+#cancel-dialog,
+#delete-dialog {
   background-color: var(--color-neutral-50);
   border: 1px solid var(--color-neutral-100);
   box-shadow: var(--shadow-lg);
   margin: auto;
 }
 
-#cancel-dialog .dialog-text {
+.dialog-text {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-16);
@@ -198,13 +200,14 @@ body {
   font-weight: var(--font-weight-400);
 }
 
-#cancel-dialog .dialog-text p:first-child {
+.dialog-text p:first-child {
   font-size: var(--font-size-body-md);
   font-weight: var(--font-weight-700);
   color: var(--color-primary-950);
 }
 
-#cancel-dialog .dialog-action {
+.dialog-action,
+.dialog-action form {
   display: flex;
   width: 100%;
   gap: var(--spacing-8);
@@ -563,3 +566,60 @@ main .heading {
   border-top: 1px solid var(--color-primary-400);
   width: 100%;
 }
+
+/* ------ VIEW BOOK PAGE ------ */
+
+.book-cover {
+  width: 150px;
+  height: auto;
+  object-fit: contain;
+}
+
+.book-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+.book-title-author {
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-400);
+  color: var(--color-secondary-950);
+}
+
+.book-title-author h1 {
+  font-size: var(--font-size-h1);
+  color: var(--color-primary-950);
+  margin-bottom: var(--spacing-8);
+}
+
+.book-date-read {
+  font-size: var(--font-size-body-xs);
+  font-weight: var(--font-weight-400);
+  color: var(--color-secondary-950);
+}
+
+.book-date-read span {
+  font-weight: var(--font-weight-600);
+  padding-left: var(--spacing-8);
+}
+
+.book-notes p:first-child {
+  font-size: var(--font-size-body-xs);
+  font-weight: var(--font-weight-600);
+  color: var(--color-primary-950);
+  margin-bottom: var(--spacing-8);
+}
+
+.book-notes {
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-400);
+  color: var(--color-secondary-950);
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+

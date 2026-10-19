@@ -11,9 +11,9 @@
 
     <main>
         <% if (hasCover) { %>
-            <img src="https://covers.openlibrary.org/b/isbn/<%= book.isbn %>-L.jpg" alt="<%= book.title %> cover">
+            <img class="book-cover" src="https://covers.openlibrary.org/b/isbn/<%= book.isbn %>-L.jpg" alt="<%= book.title %> cover">
         <% } else { %>
-            <img src="/images/placeholder-img.jpg" alt="">
+            <img class="book-cover" src="/images/placeholder-img.jpg" alt="">
             <p>Cover not found</p>
         <% } %> 
 
