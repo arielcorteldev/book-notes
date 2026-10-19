@@ -471,6 +471,7 @@ header {
   justify-content: space-between;
   padding: var(--spacing-12) var(--spacing-16);
   box-shadow: var(--shadow-xs);
+  background-color: var(--color-neutral-50);
 }
 
 header .page-title {
