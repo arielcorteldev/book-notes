@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('partials/head', { title: "Edit book" })  %> 
+<%- include('partials/head', { title: "Edit " + book.title })  %> 
 <body>
-    <header id="add-book">
+    <header id="edit-book">
         <div class="page-title">
             <a href="/books/<%= book.id %>" id="back-link">‹ Back to Book</a><span> | </span>
             <p>Edit Book</p>
