@@ -11,8 +11,6 @@ const cancelDestination = openCancelBtn.dataset.cancelHref;
 
 const fieldIds = ["title", "author", "date-read", "isbn", "notes"];
 
-// let formChanged = fieldIds.some((id) => document.getElementById(id).value !== "") || bookForm.querySelector('input[name="rating"]:checked') !== null;
-
 function getFormState() {
     const checkedRating = bookForm.querySelector('input[name="rating"]:checked');
     return JSON.stringify([

@@ -11,7 +11,7 @@
 
     <main>
         <%- include('partials/flash') %>
-        <form id="book-form" method="POST" action="/books/<%= book.id %>" novalidate>
+        <form id="book-form" method="POST" action="/books/<%= book.id %>" novalidate data-has-errors="<%= Object.keys(errors).length > 0 %>">
             <h1>Book Details</h1>
             <hr>
 
