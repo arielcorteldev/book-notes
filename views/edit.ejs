@@ -4,14 +4,14 @@
 <body>
     <header id="add-book">
         <div class="page-title">
-            <a href="/" id="back-link">‹ Back to Library</a><span> | </span>
+            <a href="/books/<%= book.id %>" id="back-link">‹ Back to Book</a><span> | </span>
             <p>Edit Book</p>
         </div>
     </header>
 
     <main>
         <%- include('partials/flash') %>
-        <form id="book-form" method="POST" action="/books" novalidate>
+        <form id="book-form" method="POST" action="/books/<%= book.id %>" novalidate>
             <h1>Book Details</h1>
             <hr>
 
@@ -107,17 +107,23 @@
             </div>
             
             <button class="btn btn-sm btn-primary" type="submit">
-                <span>
-                    <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4.08333 0V8.16667M0 4.08333H8.16667" stroke="#F6F3EE" stroke-width="2"/>
-                    </svg>    
-                </span>
-                Add book
+                Save changes
             </button>
-            <button class="btn btn-sm btn-secondary" type="button" id="open-cancel-dialog" data-cancel-href="/">
+            <button class="btn btn-sm btn-secondary" type="button" id="open-cancel-dialog" data-cancel-href="/books/<%= book.id %>">
                 Cancel
             </button>
         </form>
+
+        <dialog id="cancel-dialog">
+            <div class="dialog-text">
+                <p>Discard changes?</p>
+                <p>You have unsaved changes. If you leave now, they'll be lost.</p>
+            </div>
+            <div class="dialog-action">
+                <button type="button" id="stay-btn" class="btn btn-sm btn-primary">Keep editing</button>
+                <a href="/books/<%= book.id %>" class="btn btn-sm btn-delete-secondary">Discard</a>
+            </div>
+        </dialog>
     </main>
 </body>
 </html>
