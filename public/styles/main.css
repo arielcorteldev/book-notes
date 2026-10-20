@@ -148,11 +148,63 @@ body {
 
 /* FLASH NOTIFICATION */
 .flash {
+  position: fixed;
+  top: var(--spacing-16);
+  inset-inline: 0;
+  margin-inline: auto;
+  width: fit-content;
+  max-width: calc(100% - 32px);
+  z-index: 100;
+
   display: flex;
   align-items: center;
   gap: var(--spacing-8);
   padding: var(--spacing-16) var(--spacing-24);
   border-radius: 6px;
+}
+
+@keyframes flash-in-out {
+  0% {
+    transform: translateY(calc(-100% - 24px));
+    opacity: 0;
+    animation-timing-function: ease-out;   /* easing for the enter segment */
+  }
+  10% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  90% {
+    transform: translateY(0);
+    opacity: 1;
+    animation-timing-function: ease-in;    /* easing for the exit segment */
+  }
+  100% {
+    transform: translateY(calc(-100% - 24px));
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.flash {
+  animation: flash-in-out 3.8s forwards;
+}
+
+@keyframes flash-fade {
+  0%, 100% { opacity: 0; visibility: hidden; }
+  10%, 90% { opacity: 1; visibility: visible; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flash { animation-name: flash-fade; }
+}
+
+.flash:hover,
+.flash:focus-within {
+  animation-play-state: paused;
+}
+
+.flash--error {
+  animation-duration: 6s;
 }
 
 .flash--success {
