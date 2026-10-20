@@ -59,6 +59,7 @@ body {
   background-color: var(--color-primary-950);
   transform: translateY(1px);
   box-shadow: var(--shadow-xs);
+  transition-duration: var(--duration-fast);
 }
 
 .btn-primary:disabled {
@@ -113,6 +114,7 @@ body {
   background-color: var(--color-accent-red-600);
   transform: translateY(1px);
   box-shadow: var(--shadow-xs);
+  transition-duration: var(--duration-fast);
 }
 
 .btn-delete:disabled {
@@ -204,6 +206,17 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .flash { animation-name: flash-fade; }
+
+  .library-card {
+    transition: none;
+  }
+
+  .library-card:hover,
+  .library-card:active {
+    transform: none;
+  }
+
+  
 }
 
 .flash:hover,
@@ -350,13 +363,16 @@ body {
   display: flex;
   gap: var(--spacing-12);
   padding: var(--spacing-12);
+  align-items: flex-start;
 
   background-color: var(--color-neutral-50);
   border: 1px solid var(--color-neutral-100);
   color: var(--color-secondary-950);
   font-size: var(--font-size-body-xs);
   text-decoration: none;
-  transition: transform var(--duration-slow) ease-out;
+  transition: 
+    transform var(--duration-normal) ease-out,
+    box-shadow var(--duration-normal) ease-out;
 }
 
 .library-card:hover {
@@ -367,6 +383,7 @@ body {
 .library-card:active {
   box-shadow: var(--shadow-xs);
   transform: translateY(1px);
+  transition-duration: var(--duration-fast);
 }
 
 .library-card > div {
