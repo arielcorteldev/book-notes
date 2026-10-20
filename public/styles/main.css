@@ -13,6 +13,12 @@ body {
   padding: var(--spacing-96) var(--spacing-24) var(--spacing-64) var(--spacing-24);
 }
 
+@media (min-width: 1024px) {
+  body {
+    padding: var(--spacing-128) var(--spacing-64);
+  }
+}
+
 /* ------- COMPONENTS -------- */
 
 /* BUTTONS */
@@ -25,6 +31,7 @@ body {
   padding: var(--spacing-8) var(--spacing-16);
   font-size: var(--font-size-body-sm);
 
+  font-family: var(--font-family);
   font-weight: var(--font-weight-700);
   text-decoration: none;
   transition: all var(--duration-normal) ease-out;
@@ -269,7 +276,12 @@ body {
   align-items: center;
 }
 
-
+@media (min-width: 1024px) {
+  #cancel-dialog[open],
+  #delete-dialog[open] {
+    width: 500px;
+  }
+}
 
 /* SORT */
 .sort {
@@ -399,6 +411,29 @@ body {
   font-weight: var(--font-weight-600);
 }
 
+/* Adjust sizing and spacing of cards for bigger screens */
+@media (min-width: 1024px) {
+  .library-card {
+    gap: var(--spacing-16);
+    padding: var(--spacing-16);
+    min-width: 400px;
+
+    font-size: var(--font-size-body-sm);
+  }
+
+  .library-card > div {
+    gap: var(--spacing-12);
+  }
+
+  .book-title-author {
+    gap: var(--spacing-8);
+  }
+
+  .book-title-author p:first-child {
+    font-size: var(--font-size-body-md);
+  }
+}
+
 /* FORM FIELDS */
 
 .form-field {
@@ -522,7 +557,6 @@ input:focus-visible, textarea:focus-visible {
   fill: currentColor;
 }
 
-
 /* ------ HOME PAGE ------ */
 
 /* HEADER */
@@ -572,6 +606,30 @@ header .page-title > p {
   font-weight: var(--font-weight-700);
 }
 
+/* Adjust header on bigger screens */
+@media (min-width: 1024px) {
+  header {
+    padding: var(--spacing-24) var(--spacing-64);
+  }
+
+  #icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  #app-name {
+    font-size: var(--font-size-body-lg);
+  }
+
+  header .page-title > a {
+    font-size: var(--font-size-body-sm);
+  }
+  
+  header .page-title > p {
+    font-size: var(--font-size-body-lg);
+  }
+}
+
 main {
   display: flex;
   flex-direction: column;
@@ -597,10 +655,32 @@ main .heading {
   font-size: var(--font-size-body-xs);
 }
 
+/* Adjust main on bigger screens */
+@media (min-width: 1024px) {
+  main .heading {
+    gap: var(--spacing-16);
+  }
+
+  .heading h1 {
+    font-size: var(--font-size-h1-desktop);
+  }
+
+  .heading p {
+    font-size: var(--font-size-body-sm);
+  }
+}
+
 .library {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--spacing-16);
+}
+
+@media (min-width: 1024px) {
+  .library {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-24);
+  }
 }
 
 
@@ -612,6 +692,8 @@ main .heading {
   gap: var(--spacing-16);
   padding: var(--spacing-16);
   width: 100%;
+  max-width: 600px;
+  margin: auto;
 
   background-color: var(--color-neutral-50);
   border: 1px solid var(--color-neutral-100);
@@ -628,7 +710,29 @@ main .heading {
   width: 100%;
 }
 
+@media (min-width: 1024px) {
+  #book-form {
+    gap: var(--spacing-24);
+    padding: var(--spacing-24) var(--spacing-48);
+
+  }
+
+  #book-form h1 {
+    font-size: var(--font-size-h1-desktop);
+  }
+}
+
 /* ------ VIEW BOOK PAGE ------ */
+.book-view-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 700px;
+  margin: auto;
+  gap: var(--spacing-24);
+  justify-content: flex-start;
+  align-items: flex-start;
+}
 
 .book-cover {
   width: 150px;
@@ -682,6 +786,37 @@ main .heading {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-16);
+}
+
+@media (min-width: 1024px) {
+  .book-cover {
+    width: 250px;
+  }
+
+  .book-details {
+    gap: var(--spacing-24);
+  }
+
+  .book-title-author {
+    font-size: var(--font-size-body);
+  }
+  
+  .book-title-author h1 {
+    font-size: var(--font-size-h1-desktop);
+  }
+
+  .book-notes p:first-child {
+    font-size: var(--font-size-body-sm);
+  }
+  
+  .book-notes {
+    font-size: var(--font-size-body);
+  }
+
+  .action-buttons {
+    flex-direction: row;
+    gap: var(--spacing-24);
+  }
 }
 
 /* ------ DESKTOP SCREEN ------ */

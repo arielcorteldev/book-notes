@@ -105,18 +105,20 @@
                     <span id="notes-count"><%= (book.notes || "").length %> / 1000</span>
                 </div>
             </div>
-            
-            <button class="btn btn-primary" type="submit">
-                <span>
-                    <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4.08333 0V8.16667M0 4.08333H8.16667" stroke="#F6F3EE" stroke-width="2"/>
-                    </svg>    
-                </span>
-                Add book
-            </button>
-            <button class="btn btn-secondary" type="button" id="open-cancel-dialog" data-cancel-href="/">
-                Cancel
-            </button>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" type="submit">
+                    <span>
+                        <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.08333 0V8.16667M0 4.08333H8.16667" stroke="#F6F3EE" stroke-width="2"/>
+                        </svg>    
+                    </span>
+                    Add book
+                </button>
+                <button class="btn btn-secondary" type="button" id="open-cancel-dialog" data-cancel-href="/">
+                    Cancel
+                </button>
+            </div>
         </form>
 
         <dialog id="cancel-dialog">

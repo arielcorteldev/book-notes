@@ -44,12 +44,12 @@
   --font-size-h6-mobile: var(--font-size-12);
 
   /* Desktop Sizes */
-  --font-size-h1-desktop: var(--font-size-72); /* 72px */
-  --font-size-h2-desktop: var(--font-size-60); /* 60px */
-  --font-size-h3-desktop: var(--font-size-48); /* 48px */
-  --font-size-h4-desktop: var(--font-size-36); /* 36px */
-  --font-size-h5-desktop: var(--font-size-30); /* 30px */
-  --font-size-h6-desktop: var(--font-size-24); /* 24px */
+  --font-size-h1-desktop: var(--font-size-30); /* 72px */
+  --font-size-h2-desktop: var(--font-size-24); /* 60px */
+  --font-size-h3-desktop: var(--font-size-20); /* 48px */
+  --font-size-h4-desktop: var(--font-size-18); /* 36px */
+  --font-size-h5-desktop: var(--font-size-16); /* 30px */
+  --font-size-h6-desktop: var(--font-size-14); /* 24px */
 
   /* Active Sizes (start with mobile) */
   --font-size-h1: var(--font-size-h1-mobile);
