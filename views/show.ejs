@@ -37,8 +37,8 @@
             </div>
 
             <div class="action-buttons">
-                <a href="/books/<%= book.id %>/edit" class="btn btn-sm btn-primary">Edit</a>
-                <button type="button" id="open-delete-dialog" class="btn btn-sm btn-delete-secondary">Delete</button>
+                <a href="/books/<%= book.id %>/edit" class="btn btn-primary">Edit</a>
+                <button type="button" id="open-delete-dialog" class="btn btn-delete-secondary">Delete</button>
             </div>
 
             <dialog id="delete-dialog">
@@ -48,8 +48,8 @@
                 </div>
                 <div class="dialog-action">
                     <form method="POST" action="/books/<%= book.id %>/delete">
-                        <button type="submit" class="btn btn-sm btn-delete">Delete</button>
-                        <button type="button" id="cancel-delete" class="btn btn-sm btn-secondary">Keep book</a>
+                        <button type="submit" class="btn btn-delete">Delete</button>
+                        <button type="button" id="cancel-delete" class="btn btn-secondary">Keep book</a>
                     </form>
                 </div>
             </dialog>
