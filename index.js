@@ -5,7 +5,7 @@ import pg from "pg";
 import axios from "axios";
 import dotenv from 'dotenv';
 import session from 'express-session';
-import flash from 'connect-flash';
+// import flash from 'connect-flash';
 
 // Setup dotenv
 dotenv.config();
@@ -39,7 +39,25 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 }));
-app.use(flash()); // to use connect-flash
+// app.use(flash()); // to use connect-flash
+
+// Minimal flash messages stored in the session.
+// req.flash(type, message) queues a message; req.flash(type) returns the queued
+// messages for that type as an array and clears them (read once, then gone).
+app.use((req, res, next) => {
+  req.flash = (type, message) => {
+    // Read mode: no message given, so return and clear this type
+    if (message === undefined) {
+      const messages = req.session.flash?.[type] || [];
+      if (req.session.flash) delete req.session.flash[type];
+      return messages;
+    }
+    // Write mode: queue the message under its type
+    req.session.flash ??= {};
+    (req.session.flash[type] ??= []).push(message);
+  };
+  next();
+});
 
 // Date validation
 // Checks if date is valid and not empty
