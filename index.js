@@ -5,7 +5,6 @@ import pg from "pg";
 import axios from "axios";
 import dotenv from 'dotenv';
 import session from 'express-session';
-// import flash from 'connect-flash';
 
 // Setup dotenv
 dotenv.config();
@@ -14,7 +13,8 @@ dotenv.config();
 const app = express();
 const port = 3000;
 
-// Set pg to not convert DATE columns into JS Date objects - just return the raw value
+// Set pg to not convert DATE columns into JS Date objects - just return the raw value 
+// so a date like 2026-10-01 doesn’t turn into a JS Date and shift by timezone when serialized.
 const { types } = pg;
 types.setTypeParser(1082, (val) => val);
 
@@ -29,9 +29,9 @@ const db = new pg.Client({
 db.connect();
 
 // Middlewares
-app.use(express.static("public")); // to acccess public folder (for css)
+app.use(express.static("public")); // to access public folder
 app.set("view engine", "ejs"); // to set views engine as  ejs (views folder)
-app.use(bodyParser.urlencoded({ extended: true })); // to parse incoming req and have a body you can acess
+app.use(bodyParser.urlencoded({ extended: true })); // to parse incoming req and have a body you can access
 app.use(bodyParser.json()); // to set bodyparser to auto-parse req to JSON bodies
 // Sets up express session
 app.use(session({
@@ -39,7 +39,6 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 }));
-// app.use(flash()); // to use connect-flash
 
 // Minimal flash messages stored in the session.
 // req.flash(type, message) queues a message; req.flash(type) returns the queued
@@ -156,7 +155,7 @@ function validateBook(book) {
     errors.isbn = "This ISBN doesn't look valid - check for typos.";
   }
 
-  // check if rating is NaN (empty), if less than 1 or greather than 5
+  // check if rating is NaN (empty), if less than 1 or greater than 5
   if (isNaN(book.rating) || book.rating < 1 || book.rating > 5) {
     errors.rating = "Please select a rating between 1 and 5.";
   }
@@ -186,6 +185,7 @@ async function coverExists(isbn) {
   try {
     // GET request to Open Library to retrieve book cover via ISBN
     await axios.get(
+      // ?default=false makes Open Library return a 404 for a missing cover, so the failure can be detected instead of getting a blank image.
       `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg?default=false`,
     );
     // if request successful, return true
@@ -293,12 +293,12 @@ app.post("/books", async (req, res) => {
       ],
     );
 
-    // res.status(201).json(newBook);
     // flash success with message and redirect to home
     req.flash("success", "Book was added to your library.");
     res.redirect("/")
   } catch (error) {
     // if there's an error, check if error.code is UNIQUE CONSTRAINT
+    // error.code === "23505" is the Postgres unique-violation code
     if (error.code === "23505") {
       // if yes, return and render new.ejs with the newBook values and an error for isbn field 
       return res.render("new.ejs", {
@@ -326,7 +326,7 @@ app.get("/books/:id", async (req, res) => {
     if (!book) {
       // flash error and message
       req.flash("error", "This book no longer exists.");
-      // redirecct to /
+      // redirect to /
       return res.redirect("/");
     }
 
@@ -351,12 +351,11 @@ app.get("/books/:id/edit", async (req, res) => {
     const result = await db.query("SELECT * FROM books WHERE id = $1", [id]);
     const book = result.rows[0];
 
-    // if book does not exist, silenty redirect to /
+    // if book does not exist, silently redirect to /
     if (!book) {
       return res.redirect("/");
     }
 
-    // res.json(book);
     // render edit.ejs with the values of the book
     res.render("edit.ejs", { book, errors: {} });
   } catch (error) {
@@ -377,7 +376,7 @@ app.post("/books/:id", async (req, res) => {
     author: req.body.author,
     isbn: req.body.isbn ? req.body.isbn.replace(/-/g, "").toUpperCase() : null,
     rating: parseInt(req.body.rating),
-    notes: req.body.notes,
+    notes: req.body.notes?.replace(/\r\n/g, "\n"),
     date_read: req.body.date_read,
   }
 
@@ -403,20 +402,19 @@ app.post("/books/:id", async (req, res) => {
         id, 
       ]);
 
-      // checks if there's no book updated (rowcCount === 0), book does not exist
+      // checks if there's no book updated (rowCount === 0), book does not exist
     if (result.rowCount === 0) {
       // if yes, redirect to /
       return res.redirect("/");
     }
 
-    // res.status(200).json(updatedBook);
     // flash success message and redirect to /
     req.flash("success", "Changes to your book notes were saved.");
     res.redirect("/");
   } catch (error) {
     // if there's an error, check if error.code is UNIQUE CONSTRAINT
     if (error.code === "23505") {
-      // if yes, return and render new.ejs with the newBook values and an error for isbn field 
+      // if yes, return and render edit.ejs with the updatedBook values and an error for isbn field 
       return res.render("edit.ejs", {
         book: { ...updatedBook, id },
         errors: { isbn: "This book is already on your library." },
@@ -434,7 +432,7 @@ app.post("/books/:id/delete", async (req, res) => {
   // convert id to integer
   const id = parseInt(req.params.id);
   try {
-    // db querty to delete the book that matches id
+    // db query to delete the book that matches id
     const result = await db.query("DELETE FROM books WHERE id = $1", [ id ]);
 
     // checks if book does not exist
