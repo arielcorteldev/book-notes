@@ -37,8 +37,8 @@ Built as a capstone project for Dr. Angela Yu's web development bootcamp. The id
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repository-url>
-cd <repository-folder>
+git clone https://github.com/arielcorteldev/book-notes.git
+cd book-notes
 ```
 
 ### 2. Install dependencies
