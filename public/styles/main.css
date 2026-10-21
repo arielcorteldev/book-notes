@@ -587,6 +587,7 @@ header {
   padding: var(--spacing-12) var(--spacing-16);
   box-shadow: var(--shadow-xs);
   background-color: var(--color-neutral-50);
+  z-index: 100;
 }
 
 header .page-title {
@@ -755,6 +756,12 @@ main .heading {
   width: 150px;
   height: auto;
   object-fit: contain;
+}
+
+.cover-error {
+  font-size: var(--font-size-body-xs);
+  font-weight: var(--font-weight-500);
+  color: var(--color-accent-red-300);
 }
 
 .book-details {

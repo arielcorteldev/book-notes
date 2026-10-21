@@ -15,7 +15,9 @@
                 <img class="book-cover" src="https://covers.openlibrary.org/b/isbn/<%= book.isbn %>-L.jpg" alt="<%= book.title %> cover">
             <% } else { %>
                 <img class="book-cover" src="/images/placeholder-img.jpg" alt="">
-                <p>Cover not found</p>
+                <% if (book.isbn) { %>
+                    <p class="cover-error">Cover not found</p>
+                <% } %>
             <% } %> 
     
             <div class="book-details">
